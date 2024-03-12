@@ -332,6 +332,7 @@ typename BinarySearchTree<Key, Value>::iterator&
 BinarySearchTree<Key, Value>::iterator::operator++()
 {
     current_=successor(current_->getRight());
+    return *this;
 }
 
 
@@ -571,7 +572,7 @@ BinarySearchTree<Key, Value>::predecessor(Node<Key, Value>* current)
       }
     } 
 } 
-
+return NULL;
 }
 
 template<class Key, class Value>
@@ -591,7 +592,7 @@ successor(Node<Key, Value>* current)
       }
     } 
 } 
-
+return NULL;
 }
 
 
@@ -659,7 +660,7 @@ Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) con
 template<typename Key, typename Value>
 bool BinarySearchTree<Key, Value>::isBalanced() const
 {
-  balanceHelper(root_);
+  return balanceHelper(root_);
 }
 
 template<typename Key, typename Value>
@@ -672,7 +673,7 @@ int getHeight(Node<Key, Value>* node) {
 }
 
 template<typename Key, typename Value>
-int balanceHelper(Node<Key, Value>* node) {
+bool balanceHelper(Node<Key, Value>* node) {
   if(node==NULL){return true;}
   int left = getHeight(node->getLeft());
   int right = getHeight(node->getRight());
